@@ -22,12 +22,10 @@ $(document).ready(function () {
       $("#keyboard-upper-container").show();
     }
   });
-
   $(document).keyup(function (shift) { // Tuggles lower keyboard with shift-key up
     if (shift.which === 16) {
       $("#keyboard-lower-container").show();
       $("#keyboard-upper-container").hide();
-      $(currentKey).css({ "background-color": "yellow" });
 
     }
   });
@@ -38,22 +36,26 @@ $(document).ready(function () {
     if (currentSentence.charCodeAt(charIndex) === e.keyCode) { // 
       let currentKey = $("#" + e.charCode);
       let styleObject = $(currentKey).prop("style");
-      styleObject.removeProperty("background-color");
+      $(currentKey).css({ "background-color": "yellow" });
+      $(document).keyup(function(){
+        styleObject.removeProperty("background-color");
+        
+
+      })
       $("#yellow-block").css("left", "+=20");
       charIndex++;
       nextChar = currentSentence[charIndex];
       $("#target-letter").append(nextChar);
-    }
-    
-    
-    // $("#target-letter").append(currentChar);
-    // $("#sentence").append(currentSentence);
-
-
-    // if (e.which === charIndex.charCodeAt(0)) {
+    // } else if (e.which === charIndex.charCodeAt(0)) {
     //   $('#feedback').append('<span class="glyphicon glyphicon-ok"></span>');
-    // }
+    // };
+
+
+    }
   });
+
+
+  
 
   $("#sentence").append(currentSentence);
   $("#target-letter").append(currentChar);
